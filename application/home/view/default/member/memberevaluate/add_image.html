@@ -1,0 +1,100 @@
+{extend name="default/base/base_member" /}
+{block name="member_main"}
+
+
+
+<div class="dsm-flow-layout">
+    <div class="dsm-flow-container">
+        <div class="title"><a href="{:url('Memberevaluate/index')}" class="dsm-btn-mini fr"><i
+                    class="fa fa-reply"></i>{$Think.lang.return_space}</a>
+            <h3>{$Think.lang.merchandise_carry_share_order}</h3>
+        </div>
+        <div class="alert">
+            <h4>{$Think.lang.picture_upload_request}：</h4>
+            {$Think.lang.picture_format_description}
+        </div>
+        <form id="add_form" action="{:url('Memberevaluate/add_image_save')}" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="geval_id" value="{$geval_info.geval_id}">
+            <div class=" dsm-default-form">
+                <h3>{$Think.lang.evaluation_information}</h3>
+                <dl>
+                    <dt>{$Think.lang.commodity_information}：</dt>
+                    <dd>
+                        <div>
+                            <a href="{:url('Goods/index',['goods_id'=>$geval_info.geval_goodsid])}" target="_blank"><img  src="{:goods_cthumb($geval_info.geval_goodsimage)}" onload="javascript:ResizeImage(this,44,44);"/></a>
+                            <a href="{:url('Goods/index',['goods_id'=>$geval_info.geval_goodsid])}" target="_blank">{$geval_info.geval_goodsname}</a>
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>{$Think.lang.commodity_rating}：</dt>
+                    <dd>
+                        <div class="raty" style="display:inline-block;"
+                             data-score="{$geval_info.geval_scores}"></div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>{$Think.lang.comment_details}：</dt>
+                    <dd>{$geval_info.geval_content}</dd>
+                </dl>
+                <h3 class="mt20">{$Think.lang.upload_share_pictures}</h3>
+                <div class="evaluation-image">
+                    <ul>
+                        <li>
+                            <p>
+                                <input name="revaluate_pic1" type="file" />
+                                <span class="error"></span> </p>
+                            <p>
+                                <input name="revaluate_pic2" type="file" />
+                                <span class="error"></span> </p>
+                            <p>
+                                <input name="revaluate_pic3" type="file" />
+                                <span class="error"></span> </p>
+                            <p>
+                                <input name="revaluate_pic4" type="file" />
+                                <span class="error"></span> </p>
+                            <p>
+                                <input name="revaluate_pic5" type="file" />
+                                <span class="error"></span> </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom">
+                    <label class="submit-border">
+                        <input id="btn_submit" class="submit" type="submit" value="{$Think.lang.confirm_submission}">
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="{$Think.PLUGINS_SITE_ROOT}/js/jquery.raty/jquery.raty.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.raty').raty({
+            path: "{$Think.PLUGINS_SITE_ROOT}/js/jquery.raty/img",
+            readOnly: true,
+            score: function() {
+                return $(this).attr('data-score');
+            }
+        });
+
+        $('#add_form').validate({
+            errorPlacement: function(error, element){
+                error.appendTo(element.nextAll('span.error'));
+            },
+            submitHandler:function(form){
+                ajaxpost('add_form', '', '', 'onerror')
+            },
+            rules : {
+            },
+            messages : {
+            }
+        });
+    });
+</script>
+
+
+
+{/block}
