@@ -13,13 +13,14 @@ class Login extends Controller {
     }
 
     public function index() {
+
+
         if (session('admin_id')) {
             $this->success('已经登录', 'Index/index');
+
+
         }
         if (request()->isPost()) {
-
-
-
 
             $admin_name = input('post.admin_name');
             $admin_password = input('post.admin_password');
@@ -31,10 +32,14 @@ class Login extends Controller {
                 'admin_name' => $admin_name,
                 'admin_password' => $admin_password,
                 'captcha' => $captcha,
+
             );
 
             //验证数据  BEGIN
             $login_validate = validate('login');
+
+
+
             if (!$login_validate->scene('index')->check($data)) {
                 ds_json_encode(10001,$login_validate->getError());
             }
@@ -47,6 +52,8 @@ class Login extends Controller {
             $condition['admin_name'] = $admin_name;
             $condition['admin_password'] = md5($admin_password);
             $admin_mod=model('admin');
+
+
             $admin_info = $admin_mod->getOneAdmin($condition);
 
             if (is_array($admin_info) and !empty($admin_info)) {

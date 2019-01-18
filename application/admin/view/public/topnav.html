@@ -16,7 +16,7 @@
             {/foreach}
         </ul>
         <ul class="fr" style="float:right">
-            <li><span>您好,{$Think.session.admin_name}</span></li>
+            <li><span>您好,{$Request.session.admin_name}</span></li>
             <li><a href="{:url('Index/modifypw')}" target="main-frame">修改密码</a></li>
             <li><a href="javascript:dsLayerConfirm('{:url('Login/logout')}','您确定退出吗?')">安全退出</a></li>
             <li><a href="javascript:dsLayerConfirm('{:url('Index/clear')}','确定清理全部缓存?')" target="main-frame">{$Think.lang.ds_cache}</a></li>

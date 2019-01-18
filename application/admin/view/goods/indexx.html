@@ -158,7 +158,7 @@
           <td class="align-center">
               <a href="{:url('/home/goods/index',['goods_id' =>$storage_array[$v['goods_commonid']]['goods_id']])}" target="_blank" class="dsui-btn-view"><i class="fa"></i>{$Think.lang.ds_view}</a>
               <a href="{:url('Goods/edit_goods',['commonid' =>$v.goods_commonid])}" class="dsui-btn-edit"><i class="fa"></i>{$Think.lang.ds_edit}</a>
-              <a href="#"    onclick="del(this,{$v['goods_commonid']})" class="dsui-btn-del"><i class="fa"></i>{$Think.lang.ds_del}</a>
+              <a href="{:url('Goods/goods_del',['common_id'=>$v['goods_commonid']])}"     class="dsui-btn-del"><i class="fa"></i>{$Think.lang.ds_del}</a>
           </td>
         </tr>
         <tr style="display:none;">
@@ -190,8 +190,6 @@
 
 <script type="text/javascript">
 var HOMESITEURL = "{$Think.HOME_SITE_URL}";
-
-
 $(function(){
 	//商品分类
 	init_gcselect({$gc_choose_json},{$gc_json}); 
@@ -254,27 +252,6 @@ $(function(){
         }
     );
 });
-
-//删除商品
-function del(obj,id){
-    layer.confirm('确认要删除吗？',function(){
-        $.ajax({
-            url:'{:url("goods/goods_del")}',
-            type: 'POST',
-            dataType: 'json',
-            data:{common_id:id},
-            success: function(msg){
-                if(msg.info == 1){
-                    //删除页面商品对应的tr
-                    $(obj).closest('tr').remove();
-                    layer.msg('已删除!',{icon:1,time:1000});  //做1s种的弹框提示
-                }else{
-                    layer.msg('删除失败!',{icon:5,time:1000});
-                }
-            }
-        });
-    });
-}
 
 // 获得选中ID
 function getId() {

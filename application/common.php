@@ -107,7 +107,11 @@ function ds_json_encode($code, $message, $result = '')
     if (!empty($_GET['callback'])) {
         echo $_GET['callback'] . '(' . json_encode($data) . ')';
     } else {
+
+
+
         echo json_encode($data);
+
     }
     exit;
 }

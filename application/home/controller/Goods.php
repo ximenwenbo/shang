@@ -20,6 +20,7 @@ class Goods extends BaseGoods {
         // 商品详细信息
         $goods_model = model('goods');
         $goods_detail = $goods_model->getGoodsDetail($goods_id);
+
         $goods_info = $goods_detail['goods_info'];
 
         if (empty($goods_info)) {

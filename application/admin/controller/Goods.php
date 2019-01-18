@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 use think\Lang;
+use app\common\model\Goods as good;
 
 class Goods extends AdminControl {
 
@@ -99,8 +100,14 @@ class Goods extends AdminControl {
         if ($common_id <= 0) {
             $this->error(lang('ds_common_op_fail'));
         }
-        model('goods')->delGoodsAll(array('goods_commonid' => $common_id));
-        $this->success(lang('ds_common_op_succ'));
+       $rst =  model('goods')->delGoodsAll(array('goods_commonid' => $common_id));
+        //$this->success(lang('ds_common_op_succ'));
+
+        if($rst){
+            return ['info'=>1];
+        }else{
+            return ['info'=>0];
+        }
     }
 
 

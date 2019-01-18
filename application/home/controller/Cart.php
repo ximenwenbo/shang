@@ -10,7 +10,10 @@ class Cart extends BaseMember {
         parent::_initialize();
         Lang::load(APP_PATH . 'home/lang/'.config('default_lang').'/cart.lang.php');
     }
-    
+
+
+
+
     
     function index()
     {
@@ -94,6 +97,9 @@ class Cart extends BaseMember {
      */
     function add() {
         $goods_model = model('goods');
+
+
+
         $logic_buy_1 =  model('buy_1','logic');
         $goods_id = intval(input('param.goods_id'));
         $quantity = intval(input('param.quantity'));

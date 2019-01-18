@@ -15,6 +15,8 @@ class Index extends AdminControl {
     public function index() {
         $this->assign('admin_info', $this->getAdminInfo());
         return $this->fetch();
+
+
     }
 
     /**

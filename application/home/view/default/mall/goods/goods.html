@@ -92,7 +92,7 @@
             <div class="clearfix"></div>
             {/if}
             <!-- E 限时折扣  -->
-            
+
             <!-- S 抢购-->
             {if $goods.promotion_type == 'groupbuy'}
             {if $goods.upper_limit}
@@ -104,7 +104,7 @@
             {/if}
             {/notempty}
             <!-- E 抢购 -->
-            
+
             <!--S 满就送 -->
             {if $mansong_info}
             <div class="dss-mansong"> <span class="sale-name">{$Think.lang.ds_mansong}</span> <span class="sale-rule">
@@ -172,7 +172,7 @@
       </div>
       <?php }?>
       <!-- E 促销 -->
-      
+
 
       <div class="dss-logistics"><!-- S 物流与运费新布局展示  -->
         <?php if($goods['goods_state'] == 1 && $goods['is_virtual'] == 0){ ?>
@@ -315,7 +315,12 @@
           {if $IsHaveBuy=="0"}
           <!-- 加入购物车-->
           {if $goods.cart == true}
-          <a href="javascript:void(0);" dstype="addcart_submit" class="addcart {if $goods['goods_state'] == 0 || $goods['goods_storage'] <= 0}no-addcart{/if}" title="{$Think.lang.goods_index_add_to_cart}"><i class="fa fa-shopping-cart"></i>{$Think.lang.goods_index_add_to_cart}</a>
+          <a href="javascript:void(0);" dstype="addcart_submit"
+             class="addcart {if $goods['goods_state'] == 0 ||
+             $goods['goods_storage'] <= 0}no-addcart{/if}"
+             title="{$Think.lang.goods_index_add_to_cart}">
+              <i class="fa fa-shopping-cart"></i>
+              {$Think.lang.goods_index_add_to_cart}</a>
           {/if}
           <!-- 立即购买-->
           <a href="javascript:void(0);" dstype="buynow_submit" class="buynow <?php if ($goods['goods_state'] == 0 || $goods['goods_storage'] <= 0 || ($goods['is_virtual'] == 1 && $goods['virtual_indate'] < TIMESTAMP)) {?>no-buynow<?php }?>" title="{$goods.buynow_text}">{$goods.buynow_text}</a>
@@ -442,7 +447,7 @@
         <h4><a href="javascript:void(0);">{$Think.lang.goods_index_sold_record}</a></h4>
       </div>
       <div class="dss-goods-info-content bd" id="dsGoodsTraded" style="display: none">
-       
+
         <!-- 成交记录内容部分 -->
         <div id="salelog_demo" class="dss-loading"> </div>
       </div>
@@ -474,7 +479,7 @@
           </li>
           {/neq}
           {/foreach}
-          
+
         </ul>
         <div class="clear"></div>
       </div>
@@ -695,7 +700,7 @@ function checkQuantity(){
         return false;
     }
     {/if}
-    {notempty name="$goods.upper_limit"}       
+    {notempty name="$goods.upper_limit"}
     max = {$goods.upper_limit};
     if(quantity > max){
         alert('{$Think.lang.maximum_purchase}'+max+'{$Think.lang.piece}');
@@ -710,7 +715,7 @@ function checkQuantity(){
 }
 // 立即购买js
 function buynow(goods_id,quantity){
-    
+
     {if $Think.session.is_login !== '1'}
 	login_dialog();
     {else/}
@@ -820,7 +825,7 @@ $(function(){
 	        return false;
 	    }
             {/if}
-            {notempty name="$goods.upper_limit"}       
+            {notempty name="$goods.upper_limit"}
 	    max = {$goods.upper_limit};
 	    if(num >= max){
 	        alert('{$Think.lang.maximum_purchase}'+max+'{$Think.lang.piece}');
